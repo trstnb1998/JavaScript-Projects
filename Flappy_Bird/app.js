@@ -53,6 +53,7 @@ function create() {
     this.physics.add.overlap(bird, road, () => hasLanded = true, null, this);
     this.physics.add.collider(bird, road);
     this.physics.add.collider(bird, topColumns);
+    this.physics.add.collider(bird, bottomColumns);
 
     cursors = this.input.keyboard.createCursorKeys();
 }
