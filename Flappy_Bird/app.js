@@ -52,6 +52,7 @@ function create() {
 
     this.physics.add.overlap(bird, road, () => hasLanded = true, null, this);
     this.physics.add.collider(bird, road);
+    this.physics.add.collider(bird, topColumns);
 
     cursors = this.input.keyboard.createCursorKeys();
 }
@@ -59,5 +60,11 @@ function create() {
 function update() {
     if (cursors.up.isDown && !hasLanded) {
         bird.setVelocityY(-160);
+    }
+    if (!hasLanded) {
+        bird.body.velocity.x = 50;
+    }
+    if (hasLanded) {
+        bird.body.velocity.x = 0;
     }
 }
