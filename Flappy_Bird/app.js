@@ -49,12 +49,14 @@ function create() {
 
     const road = roads.create(400, 568, "road").setScale(2).refreshBody();
 
-    bird = this.physics.add.sprite(0, 50, "bird").setScale(2);
+    bird = this.physics.add.sprite(50, this.physics.world.bounds.height / 2, "bird").setScale(2);
     bird.setBounce(0.2);
     bird.setCollideWorldBounds(true);
+    bird.body.setAllowGravity(false);
 
     this.physics.add.overlap(bird, road, () => hasLanded = true, null, this);
     this.physics.add.collider(bird, road);
+
     this.physics.add.overlap(bird, topColumns, () => hasBumped = true, null, this);
     this.physics.add.overlap(bird, bottomColumns, () => hasBumped = true, null, this);
     this.physics.add.collider(bird, topColumns);
@@ -66,11 +68,11 @@ function create() {
         0, 0,
         `Press space/up to start`,
         {
-            fontFamily: '"Comic Sans MS", Times, serif',
-            fontSize: "40px",
+            fontFamily: '"Comic Sans MS", Times, serif ',
+            fontSize: "30px",
             color: "white",
             stroke: "#000000",
-            strokeThickness: 4
+            strokeThickness: 4,
         }
     )
 
@@ -97,8 +99,9 @@ function update() {
     }
     if (cursors.up.isDown || cursors.space.isDown && !isGameStarted) {
         isGameStarted = true;
+        bird.body.setAllowGravity(true); 
     }
     if (!isGameStarted) {
-        bird.setVelocityY(-160);
+        bird.setVelocityY(0);
     }
 }
