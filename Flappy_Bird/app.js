@@ -28,6 +28,7 @@ function preload() {
 let bird;
 let hasLanded = false;
 let cursors;
+let hasBumped = false;
 
 function create() {
     const background = this.add.image(0, 0, "background").setOrigin(0, 0);
@@ -52,6 +53,8 @@ function create() {
 
     this.physics.add.overlap(bird, road, () => hasLanded = true, null, this);
     this.physics.add.collider(bird, road);
+    this.physics.add.overlap(bird, topColumns, () => hasBumped = true, null, this);
+    this.physics.add.overlap(bird, bottomColumns, () => hasBumped = true, null, this);
     this.physics.add.collider(bird, topColumns);
     this.physics.add.collider(bird, bottomColumns);
 
@@ -59,13 +62,13 @@ function create() {
 }
 
 function update() {
-    if (cursors.up.isDown && !hasLanded) {
+    if (cursors.up.isDown && !hasLanded && !hasBumped) {
         bird.setVelocityY(-160);
     }
-    if (!hasLanded) {
+    if (!hasLanded && !hasBumped) {
         bird.body.velocity.x = 50;
     }
-    if (hasLanded) {
+    else {
         bird.body.velocity.x = 0;
     }
 }
