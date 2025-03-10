@@ -30,6 +30,7 @@ let hasLanded = false;
 let cursors;
 let hasBumped = false;
 let isGameStarted = false;
+let messageToPlayer;
 
 function create() {
     const background = this.add.image(0, 0, "background").setOrigin(0, 0);
@@ -60,6 +61,28 @@ function create() {
     this.physics.add.collider(bird, bottomColumns);
 
     cursors = this.input.keyboard.createCursorKeys();
+
+    messageToPlayer = this.add.text(
+        0, 0,
+        `Press space/up to start`,
+        {
+            fontFamily: '"Comic Sans MS", Times, serif',
+            fontSize: "40px",
+            color: "white",
+            stroke: "#000000",
+            strokeThickness: 4
+        }
+    )
+
+    Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
+
+    this.time.addEvent({
+        delay: 950,
+        callback: () => {
+            messageToPlayer.visible = !messageToPlayer.visible;
+        },
+        loop: true
+    });
 }
 
 function update() {
