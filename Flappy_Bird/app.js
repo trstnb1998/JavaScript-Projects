@@ -31,6 +31,7 @@ let cursors;
 let hasBumped = false;
 let isGameStarted = false;
 let messageToPlayer;
+let messageBlinkEvent;
 
 function create() {
     const background = this.add.image(0, 0, "background").setOrigin(0, 0);
@@ -69,7 +70,7 @@ function create() {
         `Press space/up to start`,
         {
             fontFamily: '"Comic Sans MS", Times, serif ',
-            fontSize: "30px",
+            fontSize: "25px",
             color: "white",
             stroke: "#000000",
             strokeThickness: 4,
@@ -78,7 +79,7 @@ function create() {
 
     Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
 
-    this.time.addEvent({
+    messageBlinkEvent = this.time.addEvent({
         delay: 950,
         callback: () => {
             messageToPlayer.visible = !messageToPlayer.visible;
@@ -99,7 +100,10 @@ function update() {
     }
     if (cursors.up.isDown || cursors.space.isDown && !isGameStarted) {
         isGameStarted = true;
-        bird.body.setAllowGravity(true); 
+        messageToPlayer.text = 'Press the "^" or "space" to stay upright\nAnd don\'t hit the columns or ground';
+        bird.body.setAllowGravity(true);
+        messageBlinkEvent.remove(false);
+        messageToPlayer.visible = true;
     }
     if (!isGameStarted) {
         bird.setVelocityY(0);
