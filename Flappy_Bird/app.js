@@ -113,4 +113,10 @@ function update() {
         messageBlinkEvent.remove(false);
         messageToPlayer.visible = true;
     }
+    if (bird.x > 750) {
+        bird.setVelocityY(40);
+        messageToPlayer.text = `Congrats! You won!`;
+        messageBlinkEvent.remove(false);
+        messageToPlayer.visible = true;
+    }
 }
