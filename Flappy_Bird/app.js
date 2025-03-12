@@ -108,4 +108,9 @@ function update() {
     if (!isGameStarted) {
         bird.setVelocityY(0);
     }
+    if (hasLanded || hasBumped) {
+        messageToPlayer.text = `Oh no! You crashed!`;
+        messageBlinkEvent.remove(false);
+        messageToPlayer.visible = true;
+    }
 }
