@@ -13,4 +13,17 @@ function fetchWeather() {
         `;
         return
     }
+
+    async function getLonAndLat() {
+        const countryCode = 1;
+        const geocodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput.replace(" ", "%20")},${countryCode}&limit=1&appid=${apiKey}`
+        if (!response.ok) {
+            console.log("Bad response! ", response.status);
+            return
+        }
+    }
+
+    async function getWeatherData() {
+
+    }
 }
