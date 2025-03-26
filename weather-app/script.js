@@ -39,6 +39,13 @@ function fetchWeather() {
     }
 
     async function getWeatherData() {
+        const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        const response = await fetch(weatherURL);
+        if (!response.ok) {
+            console.log("Bad response! ", response.status);
+            return;
+        }
 
+        const data = await response.json();
     }
 }
