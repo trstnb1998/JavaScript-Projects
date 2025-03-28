@@ -27,6 +27,7 @@ function fetchWeather() {
         if (data.length == 0) {
             console.log("Something went wrong here.");
             weatherDataSection.innerHTML = `
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="${data.weather[0].description}" width="100" />
                 <div>
                     <h2>Invalid Input: "${searchInput}"</h2>
                     <p>Please try again with a valid <u>city name</u>.</p>
